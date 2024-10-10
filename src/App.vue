@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemoryGame :cards />
+    <MemoryGame :cards :grid-size="6" />
   </div>
 </template>
 

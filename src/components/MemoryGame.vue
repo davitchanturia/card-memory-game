@@ -1,6 +1,6 @@
 <template>
     <div class="bg-slate-400 p-8 w-full h-full">
-        <div class="grid gap-3" :style="{ 'grid-template-columns': `repeat(${gridSize}, minmax(0, 1fr))` }">
+        <div class="grid gap-3" :style="{ 'grid-template-columns': `repeat(${responsiveGridSize}, minmax(0, 1fr))` }">
             <GameCard 
                 v-for="card in cardsData" 
                 :key="card.id" 
@@ -18,7 +18,7 @@ import GridSize from '@/lib/types.ts';
 import GameCard from '@/components/GameCard.vue';
 import { useCardActions } from '@/composables/useCardActions.ts';
 
-const { gridSize = 6, numCards = 12, cards = [], cardHeight = '400' } = defineProps<{ 
+const { gridSize, numCards = 12, cards = [], cardHeight = '400' } = defineProps<{ 
     gridSize?: gridSize, 
     numCards?: number, 
     cards: any[], 
@@ -31,4 +31,15 @@ const selectCardHandler = (cardId: number | string) => {
     markCardAsOpened(cardId);
 }
 
+const responsiveGridSize = computed(() => {
+    if (window.innerWidth < 640) {
+        return  gridSize - 4;
+    } else if (window.innerWidth < 768) {
+        return gridSize - 3;
+    } else if (window.innerWidth < 1024) {
+        return gridSize - 2;
+    } else {
+        return gridSize;
+    }
+})
 </script>
