@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-400 p-8 w-full h-full">
+    <div class="p-8 w-full h-full">
         <div class="grid gap-3" :style="{ 'grid-template-columns': `repeat(${responsiveGridSize}, minmax(0, 1fr))` }">
             <GameCard 
                 v-for="card in cardsData" 
@@ -13,13 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
-import GridSize from '@/lib/types.ts';
+import { computed } from 'vue';
 import GameCard from '@/components/GameCard.vue';
 import { useCardActions } from '@/composables/useCardActions.ts';
+import { GridSize } from '@/lib/types';
 
-const { gridSize, numCards = 12, cards = [], cardHeight = '400' } = defineProps<{ 
-    gridSize?: gridSize, 
+const { gridSize, cards = [], cardHeight = '400' } = defineProps<{ 
+    gridSize: GridSize, 
     numCards?: number, 
     cards: any[], 
     cardHeight?: string | number
@@ -27,7 +27,7 @@ const { gridSize, numCards = 12, cards = [], cardHeight = '400' } = defineProps<
 
 const { cardsData, markCardAsOpened } = useCardActions(cards)
 
-const selectCardHandler = (cardId: number | string) => {
+const selectCardHandler = (cardId: number): void => {
     markCardAsOpened(cardId);
 }
 

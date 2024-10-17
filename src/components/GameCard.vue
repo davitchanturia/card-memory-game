@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import Card from '@/lib/types.ts';
-import { watch, ref } from 'vue';
+import { Card } from '@/lib/types.ts';
+import { watch } from 'vue';
 
 const { card } = defineProps<{ 
     card: Card, 
@@ -25,7 +25,7 @@ watch(() => card, (newVal, oldVal) => {
     console.log('card changed', newVal, oldVal)})
 
 const emit = defineEmits<{
-    (event: 'selectCard', payload: number | string): void;
+    (event: 'selectCard', payload: number): void;
 }>();
 
 const selectCardHandler = () => {

@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
 import MemoryGame from '@/components/MemoryGame.vue'
+import { Card } from './lib/types';
 
 const cards: Card[] = [
     {
