@@ -2,7 +2,7 @@
   <div>
     <MemoryGame :cards :grid-size="6"  @allCardsAreMatched="console.log('well done')">
         <template #content="{ cardData }">
-            <div class="bg-red-500">{{ cardData }}</div> 
+            <div class="bg-red-500">{{ cardData.content }}</div> 
         </template>
     </MemoryGame>
   </div>

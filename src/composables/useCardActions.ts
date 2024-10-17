@@ -3,7 +3,17 @@ import { reactive, computed, ref } from "vue";
 
 export const useCardActions = (cards: Card[]) => {
 
-    const cardsData = reactive<Card[]>(cards);
+    const shuffledCards = (array: Card[]) => {
+        const arr = array;
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+
+        return arr;
+    }
+
+    const cardsData = reactive<Card[]>(shuffledCards(cards));
 
     let comparableCards: Card[] = reactive([]);
 
