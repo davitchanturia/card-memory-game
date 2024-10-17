@@ -42,6 +42,7 @@ export const useCardActions = (cards: Card[]) => {
     };
 
     const markCardAsOpened = (cardId: number): void => {
+        if(showCardsForMemorization.value) return;
         const card = cardsData.find(card => card.id === cardId);
 
         if (card) {
