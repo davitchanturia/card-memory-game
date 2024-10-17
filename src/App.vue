@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemoryGame :cards :grid-size="6" >
+    <MemoryGame :cards :grid-size="6"  @allCardsAreMatched="console.log('well done')">
         <template #content="{ cardData }">
             <div class="bg-red-500">{{ cardData }}</div> 
         </template>

@@ -1,11 +1,16 @@
 import { Card } from "@/lib/types";
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 
 export const useCardActions = (cards: Card[]) => {
 
-    const cardsData = reactive(cards);
+    const cardsData = reactive<Card[]>(cards);
 
     let comparableCards: Card[] = reactive([]);
+
+    const allCardsMatched = computed(() => {
+        return cardsData.every(card => card.isMatched);
+    });
+      
 
     const closeAllUnmatchedCards = (): void => {
         cardsData.forEach(card => {
@@ -46,5 +51,5 @@ export const useCardActions = (cards: Card[]) => {
         } 
     };
 
-    return { cardsData, markCardAsOpened }
+    return { cardsData, markCardAsOpened, allCardsMatched }
 }

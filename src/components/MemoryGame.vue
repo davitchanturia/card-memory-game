@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import GameCard from '@/components/GameCard.vue';
 import { useCardActions } from '@/composables/useCardActions.ts';
 import { GridSize } from '@/lib/types';
@@ -33,7 +33,18 @@ const {
     frontBgColor?: string | undefined 
 }>();
 
-const { cardsData, markCardAsOpened } = useCardActions(cards)
+const emit = defineEmits<{
+    (event: 'allCardsAreMatched' ): void;
+}>();
+
+const { cardsData, allCardsMatched, markCardAsOpened } = useCardActions(cards);
+
+watch(
+    () => allCardsMatched.value,
+    (newVal) => {
+        if(newVal === true) emit('allCardsAreMatched'); 
+    }
+)
 
 const selectCardHandler = (cardId: number): void => {
     markCardAsOpened(cardId);
