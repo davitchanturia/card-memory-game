@@ -2,9 +2,7 @@
     <div class="w-full h-full" @click="selectCardHandler">
       <transition name="flip" mode="out-in">
         <div class="card border" :class="{ flipped: card.isOpen }">
-          <div class="card-face card-front" :class="frontBgColor">
-              <!-- <img src="https://i.pinimg.com/originals/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg" alt="card" class="w-full h-full rounded-lg"> -->
-          </div>
+          <div class="card-face card-front" :class="frontBgColor"></div>
           <div class="card-face card-back rounded-lg">
               <slot />
           </div>
