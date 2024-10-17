@@ -1,28 +1,25 @@
 <template>
-    <div class="card-container w-full h-full" @click="selectCardHandler">
-        <transition name="flip" mode="out-in">
-          <div class="card" :class="{ flipped: card.isOpen }">
-            <div class="card-face card-front">
-                <img src="https://i.pinimg.com/originals/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg" alt="card" class="w-full h-full rounded-lg">
-            </div>
-            <div class="card-face card-back rounded-lg">
-                {{ card.content }}
-            </div>
+    <div class="w-full h-full" @click="selectCardHandler">
+      <transition name="flip" mode="out-in">
+        <div class="card border" :class="{ flipped: card.isOpen }">
+          <div class="card-face card-front" :class="frontBgColor">
+              <!-- <img src="https://i.pinimg.com/originals/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg" alt="card" class="w-full h-full rounded-lg"> -->
           </div>
-        </transition>
+          <div class="card-face card-back rounded-lg">
+              <slot />
+          </div>
+        </div>
+      </transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Card } from '@/lib/types.ts';
-import { watch } from 'vue';
 
-const { card } = defineProps<{ 
+const { card, frontBgColor = 'bg-blue-500' } = defineProps<{ 
     card: Card, 
+    frontBgColor?: string | undefined
 }>();
-
-watch(() => card, (newVal, oldVal) => {
-    console.log('card changed', newVal, oldVal)})
 
 const emit = defineEmits<{
     (event: 'selectCard', payload: number): void;

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <MemoryGame :cards :grid-size="6" />
+    <MemoryGame :cards :grid-size="6" >
+        <template #content="{ cardData }">
+            <div class="bg-red-500">{{ cardData }}</div> 
+        </template>
+    </MemoryGame>
   </div>
 </template>
 

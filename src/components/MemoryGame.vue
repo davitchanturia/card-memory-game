@@ -7,7 +7,10 @@
                 :card 
                 :style="{'height': cardHeight + 'px'}"
                 @selectCard="selectCardHandler"
-            >{{card.id}}</GameCard>
+                :frontBgColor
+            >
+                <slot name="content" :cardData="card" ></slot>
+        </GameCard>
         </div>
     </div>
 </template>
@@ -18,11 +21,16 @@ import GameCard from '@/components/GameCard.vue';
 import { useCardActions } from '@/composables/useCardActions.ts';
 import { GridSize } from '@/lib/types';
 
-const { gridSize, cards = [], cardHeight = '400' } = defineProps<{ 
+const { 
+    gridSize, 
+    cards = [],
+    cardHeight = '400', 
+    frontBgColor = 'bg-blue-500' 
+} = defineProps<{ 
     gridSize: GridSize, 
-    numCards?: number, 
     cards: any[], 
-    cardHeight?: string | number
+    cardHeight?: string | number,
+    frontBgColor?: string | undefined 
 }>();
 
 const { cardsData, markCardAsOpened } = useCardActions(cards)
@@ -33,7 +41,7 @@ const selectCardHandler = (cardId: number): void => {
 
 const responsiveGridSize = computed(() => {
     if (window.innerWidth < 640) {
-        return  gridSize - 4;
+        return gridSize - 4;
     } else if (window.innerWidth < 768) {
         return gridSize - 3;
     } else if (window.innerWidth < 1024) {
