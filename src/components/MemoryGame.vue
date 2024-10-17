@@ -8,6 +8,7 @@
                 :style="{'height': cardHeight + 'px'}"
                 @selectCard="selectCardHandler"
                 :frontBgColor
+                :showCardsForMemorization
             >
                 <slot name="content" :cardData="card" ></slot>
         </GameCard>
@@ -37,7 +38,15 @@ const emit = defineEmits<{
     (event: 'allCardsAreMatched' ): void;
 }>();
 
-const { cardsData, allCardsMatched, markCardAsOpened } = useCardActions(cards);
+const { 
+    cardsData, 
+    allCardsMatched, 
+    markCardAsOpened, 
+    showCardsForMemorization,
+    displayCards
+} = useCardActions(cards);
+
+displayCards();
 
 watch(
     () => allCardsMatched.value,

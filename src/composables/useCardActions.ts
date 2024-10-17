@@ -1,5 +1,5 @@
 import { Card } from "@/lib/types";
-import { reactive, computed } from "vue";
+import { reactive, computed, ref } from "vue";
 
 export const useCardActions = (cards: Card[]) => {
 
@@ -7,10 +7,9 @@ export const useCardActions = (cards: Card[]) => {
 
     let comparableCards: Card[] = reactive([]);
 
-    const allCardsMatched = computed(() => {
+    const allCardsMatched = computed<boolean>(() => {
         return cardsData.every(card => card.isMatched);
     });
-      
 
     const closeAllUnmatchedCards = (): void => {
         cardsData.forEach(card => {
@@ -51,5 +50,14 @@ export const useCardActions = (cards: Card[]) => {
         } 
     };
 
-    return { cardsData, markCardAsOpened, allCardsMatched }
+    const showCardsForMemorization = ref(false);
+
+    async function displayCards(): Promise<void> {
+        await new Promise<void>(resolve => setTimeout(resolve, 1000));
+        showCardsForMemorization.value = true;
+        await new Promise<void>(resolve => setTimeout(resolve, 3000));
+        showCardsForMemorization.value = false;
+    };
+
+    return { cardsData, markCardAsOpened, allCardsMatched, showCardsForMemorization, displayCards }
 }

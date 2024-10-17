@@ -1,7 +1,7 @@
 <template>
     <div class="w-full h-full" @click="selectCardHandler">
       <transition name="flip" mode="out-in">
-        <div class="card border" :class="{ flipped: card.isOpen }">
+        <div class="card border" :class="{ flipped: card.isOpen || showCardsForMemorization }">
           <div class="card-face card-front" :class="frontBgColor"></div>
           <div class="card-face card-back rounded-lg">
               <slot />
@@ -14,9 +14,10 @@
 <script setup lang="ts">
 import { Card } from '@/lib/types.ts';
 
-const { card, frontBgColor = 'bg-blue-500' } = defineProps<{ 
+const { card, frontBgColor = 'bg-blue-500', showCardsForMemorization } = defineProps<{ 
     card: Card, 
-    frontBgColor?: string | undefined
+    frontBgColor?: string | undefined,
+    showCardsForMemorization: boolean
 }>();
 
 const emit = defineEmits<{
