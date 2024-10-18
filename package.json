@@ -1,6 +1,6 @@
 {
   "name": "vue-card-memory-game",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A memory game component built with Vue and Tailwind CSS",
   "main": "dist/vue-card-memory-game.umd.js",
   "module": "dist/vue-card-memory-game.es.js",
