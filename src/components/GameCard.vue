@@ -27,7 +27,7 @@ const emit = defineEmits<{
 }>();
 
 const selectCardHandler = () => {
-    emit('selectCard', card.id)
+  if(!card.isMatched) emit('selectCard', card.id)
 }
 </script>
 
