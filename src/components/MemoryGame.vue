@@ -7,10 +7,16 @@
                 :card 
                 :style="{'height': cardHeight + 'px'}"
                 @selectCard="selectCardHandler"
-                :frontBgColor
+                :reverseClasses
                 :showCardsForMemorization
             >
-                <slot name="content" :cardData="card" ></slot>
+            <template #reverse>
+              <slot name="reverse"></slot>
+            </template>
+
+            <template #content>
+              <slot name="content" :cardData="card" ></slot>
+            </template>
         </GameCard>
         </div>
     </div>
@@ -26,12 +32,12 @@ const {
     gridSize, 
     cards = [],
     cardHeight = '400', 
-    frontBgColor = 'bg-blue-500' 
+    reverseClasses
 } = defineProps<{ 
     gridSize: GridSize, 
     cards: any[], 
     cardHeight?: string | number,
-    frontBgColor?: string | undefined 
+    reverseClasses?: string | undefined 
 }>();
 
 const emit = defineEmits<{
