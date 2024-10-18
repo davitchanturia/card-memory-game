@@ -1,15 +1,30 @@
 {
-  "name": "card-memory-game",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "vue-card-memory-game",
+  "version": "1.0.0",
+  "description": "A memory game component built with Vue and Tailwind CSS",
+  "main": "dist/vue-card-memory-game.umd.js",
+  "module": "dist/vue-card-memory-game.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist", 
+    "src"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "vue": "^3.5.10"
+  "keywords": [
+    "vue",
+    "memory-game",
+    "game",
+    "tailwind",
+    "vue-component"
+  ],
+  "author": "david.chanturia",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^3.5.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.5",

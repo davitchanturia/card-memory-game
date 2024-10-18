@@ -1,21 +1,21 @@
 <template>
-    <div class="p-8 w-full h-full">
-        <div class="grid gap-3" :style="{ 'grid-template-columns': `repeat(${responsiveGridSize}, minmax(0, 1fr))` }">
+    <div class="game-container">
+        <div class="card-grid" :style="{ 'grid-template-columns': `repeat(${responsiveGridSize}, minmax(0, 1fr))` }">
             <GameCard 
                 v-for="card in cardsData" 
                 :key="card.id" 
                 :card 
                 :style="{'height': cardHeight + 'px'}"
                 @selectCard="selectCardHandler"
-                :reverseClasses
-                :showCardsForMemorization
+                :reverseClasses="reverseClasses"
+                :showCardsForMemorization="showCardsForMemorization"
             >
             <template #reverse>
               <slot name="reverse"></slot>
             </template>
 
             <template #content>
-              <slot name="content" :cardData="card" ></slot>
+              <slot name="content" :cardData="card"></slot>
             </template>
         </GameCard>
         </div>
@@ -77,3 +77,16 @@ const responsiveGridSize = computed(() => {
     }
 })
 </script>
+
+<style scoped>
+.game-container {
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+}
+
+.card-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+</style>

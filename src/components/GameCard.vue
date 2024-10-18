@@ -1,22 +1,22 @@
 <template>
-    <div class="w-full h-full" @click="selectCardHandler">
-      <transition name="flip" mode="out-in">
-        <div class="card border" :class="{ flipped: card.isOpen || showCardsForMemorization }">
-          <div class="card-face card-front" :class="reverseClasses">
-            <slot name="reverse" />
-          </div>
-          <div class="card-face card-back rounded-lg">
-            <slot name="content" />
-          </div>
+  <div class="full-size" @click="selectCardHandler">
+    <transition name="flip" mode="out-in">
+      <div class="card border" :class="{ flipped: card.isOpen || showCardsForMemorization }">
+        <div class="card-face card-front" :class="reverseClasses">
+          <slot name="reverse" />
         </div>
-      </transition>
+        <div class="card-face card-back rounded">
+          <slot name="content" />
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Card } from '@/lib/types.ts';
 
-const { card, reverseClasses = 'bg-blue-500', showCardsForMemorization } = defineProps<{ 
+const { card, reverseClasses = 'blue_background', showCardsForMemorization } = defineProps<{ 
     card: Card, 
     reverseClasses?: string | undefined,
     showCardsForMemorization: boolean
@@ -32,6 +32,14 @@ const selectCardHandler = () => {
 </script>
 
 <style scoped>
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+.blue_background {
+  background-color: blue;
+}
 
 .card {
   width: 100%;
@@ -43,14 +51,14 @@ const selectCardHandler = () => {
 }
 
 .card.flipped {
-  transform: rotateY(180deg); /* Rotate card when flipped */
+  transform: rotateY(180deg);
 }
 
 .card-face {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; /* Hides the back side when flipped */
+  backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,13 +67,25 @@ const selectCardHandler = () => {
 }
 
 .card-back {
-  background-color: #fff; /* Red back */
-  transform: rotateY(180deg); /* Back side is rotated initially */
+  background-color: #fff;
+  transform: rotateY(180deg);
+  border-radius: 0.5rem; /* equivalent to rounded-lg */
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e5e7eb; /* Default border color, adjust as needed */
 }
 
 /* Transition classes to smooth out the flip */
 .flip-enter-active,
 .flip-leave-active {
   transition: transform 0.6s ease;
+}
+
+/* For the bg-blue-500 class */
+.bg-blue-500 {
+  background-color: #3b82f6;
 }
 </style>

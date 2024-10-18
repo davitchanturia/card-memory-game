@@ -1,5 +1,3 @@
-import { createApp } from 'vue'
-import './index.css'
-import App from './App.vue'
+import MemoryGame from './components/MemoryGame.vue'
 
-createApp(App).mount('#app')
+export default MemoryGame;
